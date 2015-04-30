@@ -5,7 +5,11 @@ Some demo functions are included in the file "lib-cyclogearprofiles-demo.scad".
 
 # Details:
 
-usage:  
+usage:
+put this library in one of the standard locations:
+http://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries
+e.g. Linux: $HOME/.local/share/OpenSCAD/libraries
+
 **include \<lib-cyclogearprofiles.scad\>** 
 // (no geometry generating top level code in the library file) 
 
