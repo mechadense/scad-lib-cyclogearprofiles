@@ -21,6 +21,15 @@ nteeth ... number of gear teeth
 vtp ... optional parameter -- vertices per tooth -- if left 0 (this is default) OpenSCADs resolution parameters $fa $fs or $fn will be applied.  
 verbouse ... optional parameter -- If this is set bigger than zero then info about that gear will be reported under the choosen number.  
 
+To get a cross section of a rack invoke:  
+**cyclorackprofile(trackmin,rtooth,nteeth,teethshift0,vpt=0)**  
+trackmin ... thickness of rack at the thinnest points  
+rtooth ... "radius" of gear teeth  
+nteeth ... numbers of teeth of rack (smallest allowed unit is a quater of a full tooth cycle)  
+teethshift0 ... at which quater to begin with the first tooth sensible are valued from the list: {-0.75,-0.5,0,+0.5,+0.75} all others have same effect  
+vpt ...same as for cyclogearprofile  
+
+
 ## Alignment helper functions:  
 
 There are two helper functions to align gears. One for normal meshing an one for the case that one gear has the teeth inside (a concave gear) such that both gears turn in the same direction.  

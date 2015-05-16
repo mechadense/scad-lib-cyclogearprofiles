@@ -35,6 +35,38 @@ module twistextrudegear(rtooth,nteeth,slant=45,nteethtwist=1)
   function alpha2inroll(n1,n2,alpha1,beta12) = 0 +alpha1/n2*n1 +beta12*(1-n1/n2);
 
 
+// values for teethshift0 are {-0.75,-0.5,0,+0.5,+0.75} all others have same effect
+module cyclorackprofile(trackmin=10,rtooth=4,nteeth=5,teethshift0=0,vpt=0)
+{
+  circunit = 2*3.141592653; // unit circle circumference
+
+  teethshift00 = floor(teethshift0*4)/4;
+  function sphi(phi) = phi + teethshift00*2*circunit; // shift the starting phase
+  function cyclo(r2,phi) = [(-r2+r2*cos(-sphi(phi)/circunit*360))*
+                                      sign(sin((sphi(phi)/2)/circunit*360+0)),
+                            r2*phi+r2*sin(-sphi(phi)/circunit*360)];
+  // make sure the number of quater-teeth-groove pairs is a positive natural number
+  // otherwise the rack length is nontrivial to calculate
+  n = max(floor(nteeth*4),1)/4;
+  lrack = 2*circunit*rtooth*n; // 2 full rolls once inside once outside
+
+  // may not work - needs more testing
+  usedvpt = vpt>0 ? vpt : ( ($fn>0) ? $fn :
+            ceil((360/$fa)/(2*n))
+            );
+
+  npoints = n*usedvpt; // number of points for the whole rack
+
+  list1ToN   = [ for (i = [0 : npoints]) i ];
+  pointlist = [ for (i = list1ToN) cyclo(rtooth,2*n*circunit/npoints*i) ];
+  looppoints = [[+rtooth+trackmin,lrack],[+rtooth+trackmin,0]];
+
+  list1ToN2  = concat(list1ToN,[npoints+1,npoints+2]);
+  pointlist2 = concat(pointlist,looppoints);
+
+  polygon(points = pointlist2, paths = [list1ToN2],convexity = 6);
+}
+
 module cyclogearprofile(rtooth=4,nteeth=5,vpt=0,verbouse=0)
 {
   // functions for generation of hypo- and epicycloids
@@ -47,7 +79,7 @@ module cyclogearprofile(rtooth=4,nteeth=5,vpt=0,verbouse=0)
   function epihypo(r1,r2,phi) = 
     pow(-1, 1+floor( (phi/360*(r1/r2)) )) <0 ? epi_cyclo(r1,r2,phi) : hypo_cyclo(r1,r2,phi);
 
-  // make sure the number of teeth is a positive natural number
+  // make sure the number of teeth-groove pairs is a positive natural number
   n = max(floor(nteeth),1);
 
   rrollcircle = rtooth*(2*n);
