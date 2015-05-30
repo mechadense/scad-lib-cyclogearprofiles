@@ -10,8 +10,9 @@ put this library in one of the standard locations:
 http://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries
 e.g. Linux: $HOME/.local/share/OpenSCAD/libraries
 
-**include \<lib-cyclogearprofiles.scad\>** 
-// (no geometry generating top level code in the library file) 
+**include \<lib-cyclogearprofiles.scad\>** or  
+**include \<scad-lib-cyclogearprofiles/lib-cyclogearprofiles.scad\>** depending on location  
+(there is no geometry generating top level code in this library file) 
 
 To get a crosssection of the desired gear invoke:  
 **cyclogearprofile(rtooth,nteeth,vpt,verbouse);**  
