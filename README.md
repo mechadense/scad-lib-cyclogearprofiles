@@ -55,4 +55,4 @@ To twist over the angle of multiple teeth use nteethtwist bigger than one and mu
 * The rolling radius of a cycloidical gear is two times the tooth number times the tooth radius. A helper function can be used to make code more self explanatory:  
 **rollingradius(rtooth,nteeth)**  
 * for cycloidical gears to mesh they need equal tooth radius  
-* I'd recommend to make herringbone gears instead of straight ones since staight cycloidical gears have varying axial force due to an osillating attack angle which can lead to bad vibrations under load.
+* I'd recommend to make herringbone gears instead of straight ones since staight cycloidical gears have varying axial force due to an oscillating attack angle which can lead to bad vibrations under load.
